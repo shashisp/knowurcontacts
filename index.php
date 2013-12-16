@@ -21,7 +21,7 @@
 
 
 	
-             
+              <div class="splash">
       <div class="container">
 
         <div class="row">
@@ -30,7 +30,7 @@
             
             </div>
           </div>
-        
+        </div>
 
       </div>
     </div>
@@ -60,7 +60,7 @@
             
           
                <center>
-                <p><a href="https://accounts.google.com/o/oauth2/auth?client_id=133186028197-lpsptdcfl3jhv9dpgft7jadi5aure6du.apps.googleusercontent.com&redirect_uri=http://localhost/oauth/oauth.php&scope=https://www.google.com/m8/feeds/&response_type=code" class="btn btn-info btn-lg">Try Demo >></a></p>
+                <p><a href="https://accounts.google.com/o/oauth2/auth?client_id=133186028197-lpsptdcfl3jhv9dpgft7jadi5aure6du.apps.googleusercontent.com&redirect_uri=http://getcontacts.ap01.aws.af.cm/oauth.php&scope=https://www.google.com/m8/feeds/&response_type=code" class="btn btn-info btn-lg">Try Demo >></a></p>
                </center>      
 
 </body>
