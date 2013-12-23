@@ -61,28 +61,28 @@ $accesstoken = $response->access_token;
  
 $url = 'https://www.google.com/m8/feeds/contacts/default/full?max-results='.$max_results.'&oauth_token='.$accesstoken;
 $xmlresponse =  curl_file_get_contents($url);
-if((strlen(stristr($xmlresponse,'Authorization required'))>0) && (strlen(stristr($xmlresponse,'Error '))>0)) //At times you get Authorization error from Google.
-{
-	echo "<h2>OOPS !! Something went wrong. Please try reloading the page.</h2>";
-	exit();
-}
 
-
-
-echo "<h3>Email Addresses:</h3>";
-$xml =  new SimpleXMLElement($xmlresponse);
-
-$xml->registerXPathNamespace('gd', 'http://schemas.google.com/g/2005');
-$result = $xml->xpath('//gd:email');
-
-
-//var_dump($xml);
-
+$url = 'https://www.google.com/m8/feeds/contacts/default/full?max-results='.$max_results.'&alt=json&v=3.0&oauth_token='.$accesstoken;
+$xmlresponse =  curl_file_get_contents($url);
  
-foreach ($result as $title) {
-  echo $title->attributes()->address . "<br>";
+$temp = json_decode($xmlresponse,true);
 
+
+foreach($temp['feed']['entry'] as $cnt) {
+    echo $cnt['title']['$t'] . " |- Email: " . $cnt['gd$email']['0']['address'];
+    if(isset($cnt['gd$phoneNumber'])) echo " Phone " . $cnt['gd$phoneNumber'][0]['$t'];
+    if(isset($cnt['gd$structuredPostalAddress'][0]['gd$street'])) echo " -Street " . $cnt['gd$structuredPostalAddress'][0]['gd$street']['$t'];
+    if(isset($cnt['gd$structuredPostalAddress'][0]['gd$neighborhood'])) echo " --- " . $cnt['gd$structuredPostalAddress'][0]['gd$neighborhood']['$t'];
+    if(isset($cnt['gd$structuredPostalAddress'][0]['gd$pobox'])) echo " --- " . $cnt['gd$structuredPostalAddress'][0]['gd$pobox']['$t'];
+    if(isset($cnt['gd$structuredPostalAddress'][0]['gd$postcode'])) echo " -Postcode " . $cnt['gd$structuredPostalAddress'][0]['gd$postcode']['$t'];
+    if(isset($cnt['gd$structuredPostalAddress'][0]['gd$city'])) echo " -City " . $cnt['gd$structuredPostalAddress'][0]['gd$city']['$t'];
+    if(isset($cnt['gd$structuredPostalAddress'][0]['gd$region'])) echo " -Region " . $cnt['gd$structuredPostalAddress'][0]['gd$region']['$t'];
+    if(isset($cnt['gd$structuredPostalAddress'][0]['gd$country'])) echo " -Country " . $cnt['gd$structuredPostalAddress'][0]['gd$country']['$t'];
+    echo "</br>";
 }
+
+
+
 ?>
 	</div>
 </body></html>
