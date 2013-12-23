@@ -14,7 +14,7 @@ $client_secret='-owDbyzAqae50_sJG8t0hypU';
 $redirect_uri='http://getcontacts.ap01.aws.af.cm/oauth.php';
 $max_results = 100;
  
-$auth_code = $_GET["code"];
+$auth_code = $_GET["code"];  
  
 function curl_file_get_contents($url)
 {
